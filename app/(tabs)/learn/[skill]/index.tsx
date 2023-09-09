@@ -34,7 +34,7 @@ export default function Skill() {
         </View>
         <InfoItem title="Name" content={name} />
         <InfoItem title="Description" content={description} />
-        <InfoItem title="Prerequisite" content={prerequisite} />
+        <InfoItem title="Prerequisite" content={prerequisite || "None"} />
         <View>
           <LinkComp
             text="Start Learning"
