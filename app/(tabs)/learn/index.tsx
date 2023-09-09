@@ -1,35 +1,31 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { usePath } from "../../../providers/PathContext";
+import { router } from "expo-router";
 
 const learningPaths = [
   {
     id: 1,
-    title: "Recommended",
-    description: "Recommended learning paths for you",
-    route: "recommended",
-  },
-  {
-    id: 2,
     title: "Foundations",
     description: "Fundamentals of Parkour",
     route: "foundations",
   },
   {
-    id: 3,
+    id: 2,
     title: "Beginner",
     description: "Beginner learning paths",
     route: "beginner",
   },
   {
-    id: 4,
+    id: 3,
     title: "Intermediate",
     description: "Intermediate learning paths",
     route: "intermediate",
   },
   {
-    id: 5,
+    id: 4,
     title: "Advanced",
     description: "Advanced learning paths",
     route: "advanced",
@@ -39,25 +35,33 @@ const learningPaths = [
 const LearingPathItem = ({
   title,
   description,
-  route,
+  onSelect,
 }: {
   title: string;
   description: string;
   route: string;
+  onSelect: () => void;
 }) => {
   return (
-    <Link style={styles.itemContainer} href={`/learn/${route}`}>
+    <Pressable style={styles.itemContainer} onPress={onSelect}>
       <View>
         <Text style={styles.itemTitle}>{title}</Text>
       </View>
       <View>
         <Text style={styles.itemDescription}>{description}</Text>
       </View>
-    </Link>
+    </Pressable>
   );
 };
 
 const Learn = () => {
+  const { selectPath } = usePath();
+
+  const handleSelectPath = (pathId: number, route: string) => {
+    selectPath(pathId);
+    router.push(`/learn/path/${route}`);
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -71,6 +75,7 @@ const Learn = () => {
                   title={item.title}
                   description={item.description}
                   route={item.route}
+                  onSelect={() => handleSelectPath(item.id, item.route)}
                 />
               )}
               keyExtractor={(item) => item.id.toString()}

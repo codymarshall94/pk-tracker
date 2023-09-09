@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, SafeAreaView } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import LinkComp from "../../../components/Link";
 
 export default function Home() {
   return (
@@ -10,9 +9,6 @@ export default function Home() {
         <View style={styles.header}>
           <Text style={styles.greeting}>Hi, Cody!</Text>
           <Text style={styles.subGreeting}>Your Goals</Text>
-        </View>
-        <View>
-          <LinkComp route={"/learn/recommended"} text={"Lets Train"} />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -55,6 +51,6 @@ const styles = StyleSheet.create({
   continueButtonText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "white", // Button text color
+    color: "white",
   },
 });
