@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { SkillProvider } from "../providers/SkillContext";
 import { StatusBar } from "expo-status-bar";
+import { PathProvider } from "../providers/PathContext";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,12 +49,14 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     /*<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */
-    <SkillProvider>
-      <StatusBar style="dark" backgroundColor="#FFF" />
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    </SkillProvider>
+    <PathProvider>
+      <SkillProvider>
+        <StatusBar style="dark" backgroundColor="#FFF" />
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </SkillProvider>
+    </PathProvider>
     /*</ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */
   );
 }

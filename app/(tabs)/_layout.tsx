@@ -20,6 +20,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
@@ -47,3 +48,4 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
