@@ -4,6 +4,7 @@ import { useSkill } from "../../../../providers/SkillContext";
 import { FlatList } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
 import LinkComp from "../../../../components/Link";
+import ImageSlider from "../../../../components/ImageSlider";
 
 function TaskItem({
   text,
@@ -47,21 +48,26 @@ const Tasks = () => {
   return (
     <View style={styles.container}>
       <View>
-      <FlatList
-        data={selectedSkill?.tasks}
-        renderItem={({ item }) => (
-          <TaskItem
-            text={item}
-            checked={completedTasks.includes(item)}
-            onChange={() => toggleTask(item)}
-          />
-        )}
-        keyExtractor={(item) => item}
-      />
+        <ImageSlider images={selectedSkill.taskImages} />
       </View>
       <View>
-        <LinkComp text="Finish Tasks" route={`/(tabs)/learn/${selectedSkill?.name}`} />
-
+        <FlatList
+          data={selectedSkill?.tasks}
+          renderItem={({ item }) => (
+            <TaskItem
+              text={item.name}
+              checked={completedTasks.includes(item)}
+              onChange={() => toggleTask(item)}
+            />
+          )}
+          keyExtractor={(item) => item.name}
+        />
+      </View>
+      <View>
+        <LinkComp
+          text="Finish Tasks"
+          route={`/(tabs)/learn/${selectedSkill?.name}`}
+        />
       </View>
     </View>
   );
